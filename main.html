@@ -1,0 +1,329 @@
+<html>
+
+
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <style>
+    #modal-close-btn {
+      font: inherit;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    :root {
+      --onyx: hsla(240, 0%, 12%, 1);
+      --smoky-black: #000000;
+      --transition-1: 0.25s ease;
+      --eerie-black-2: hsla(240, 0%, 0%, 1);
+      --jet: rgba(255, 255, 255, 0.08);
+      --shadow-5: hsla(0, 0%, 0%, 0.25);
+    }
+
+    .modal-close-btn:focus {
+      opacity: 1;
+    }
+
+    .modal-close-btn ion-icon {
+      --ionicon-stroke-width: 50px;
+    }
+
+    .modal-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      z-index: 20;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .modal-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .modal-container.active {
+      pointer-events: all;
+      visibility: visible;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: hsl(0, 0%, 5%);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      z-index: 1;
+      transition: var(--transition-1);
+    }
+
+    .overlay.active {
+      opacity: 0.8;
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    .testimonials-modal {
+      background: var(--eerie-black-2);
+      position: relative;
+      padding: 15px;
+      margin: 15px 12px;
+      border: 1px solid var(--jet);
+      border-radius: 14px;
+      box-shadow: var(--shadow-5);
+      transform: scale(1.2);
+      opacity: 0;
+      transition: var(--transition-1);
+      z-index: 2;
+      width: 90%;
+      height: 90%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .modal-container.active .testimonials-modal {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--onyx);
+      border-radius: 8px;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--white-2);
+      font-size: 18px;
+      opacity: 0.7;
+    }
+
+    .img02 {
+      background: var(--onyx);
+      border-radius: 8px;
+      width: 56px;
+      height: 56px;
+      margin: 8px;
+      overflow: hidden ;
+      margin-right: 20px;
+    }
+    
+   .img02  img {
+     width: 100%;
+   }
+
+    .modal-close-btn:hover,
+    .modal-close-btn:focus {
+      opacity: 1;
+    }
+
+    .modal-close-btn ion-icon {
+      --ionicon-stroke-width: 50px;
+    }
+
+    .searchContainer {
+      width: 98%;
+      margin-top: 50px;
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
+      flex-direction: column;
+    }
+
+    .conSearch {
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+     /* background: var(--onyx); */
+      width: 100%;
+      border: solid 1px #8d70ff;
+      margin-bottom: 5px;
+    }
+
+    #put {
+      border: none;
+      color: #8d70ff;
+      background: none;
+    }
+   
+   #put::placeholder {
+     color: #8d70ff;
+   }
+
+    .query0 {
+      background: #1515156E;
+      margin: 5px 0px;
+      width: 100%;
+      border-radius: 10px;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      height: 70px;
+    }
+    
+    #input:focus {
+      outline: none;
+      border-color: transparent;
+      text-decoration: none;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .contents02 {
+      width: 100%;
+      height: 80%;
+      overflow: hidden;
+      overflow-y: scroll;
+      border-radius: 10px;
+      position: relative;
+    }
+   
+  .conSearch ion-icon {
+    color: #8d70ff
+  }
+
+   .ion-icon {
+      color: white;
+    }
+
+    .shadow {
+      z-index: 3;
+    }
+
+
+
+  </style>
+</head>
+
+<body>
+  <div id="searchIcon">Search 
+    <ion-icon class="ion-icon" name="at-circle-outline"></ion-icon>
+  </div>
+
+  <div class="modal-container active" id="modal-container">
+    <div class="overlay" id="data-overlay"></div>
+    <section class="testimonials-modal">
+      <button class="modal-close-btn" id="modal-close-btn">
+        <ion-icon class="ion-icon" name="close-outline"></ion-icon>
+      </button>
+      <div class="searchContainer">
+        <div class="conSearch">         
+        <ion-icon class="ion-icon" name="at-outline"></ion-icon>
+          <input type="text" id="put" onkeyup="myFunction()" placeholder="Search name">
+        </div>
+        <div class="contents02">
+          <div class="query0">
+            <div class="img02">
+               <img src="https://1fid.com/wp-content/uploads/2022/07/girl-anime-wallaper-3-720x900.jpg" alt=""></img>
+            </div><a href="">Anfas</a>
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Aysha Lulu</a>
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Nafia</a>
+          </div>
+          <div class="query0">
+
+            <div class="img02"></div><a href="">Anfas</a>
+
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Aysha Lulu</a>
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Nafia</a>
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Anfas</a>
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Aysha Lulu</a>
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Nafia</a>
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Anfas</a>
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Aysha Lulu</a>
+          </div>
+          <div class="query0">
+            <div class="img02"></div><a href="">Nafia</a>
+          </div>
+          <div class="shadow">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  function myFunction() {
+    var input, filter, panels, a, i;
+    input = document.getElementById("put");
+    filter = input.value.toUpperCase();
+    panels = document.getElementsByClassName("query0");
+    for (i = 0; i < panels.length; i++) {
+      a = panels[i].getElementsByTagName("a")[0];
+      if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        panels[i].style.display = "";
+      } else {
+        panels[i].style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  // Element toggle function
+  const elementToggleFunc = function(elem) {
+    elem.classList.toggle("active");
+  };
+
+  // Testimonials variables
+  const testimonialsItem = document.getElementById("searchIcon");
+  const modalContainer = document.getElementById("modal-container");
+  const modalCloseBtn = document.getElementById("modal-close-btn");
+  const overlay = document.getElementById("data-overlay");
+
+  // Modal toggle function
+  const testimonialsModalFunc = function() {
+    modalContainer.classList.toggle("active");
+    overlay.classList.toggle("active");
+  };
+
+  // Add click event to all modal items
+  testimonialsItem.addEventListener("click", function() {
+    testimonialsModalFunc();
+  });
+
+  // Add click event to modal close button
+  modalCloseBtn.addEventListener("click", testimonialsModalFunc);
+  overlay.addEventListener("click", testimonialsModalFunc);
+</script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</html>
